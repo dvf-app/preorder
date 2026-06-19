@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  	<title>DVF Pre-Order</title>
+  	<link rel="icon" type="image/png" href="https://img.icons8.com/color/96/vegan-food.png">
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden; /* Prevents double scrolling */
+        background-color: #f4f6f8;
+      }
+      
+      /* The outer wrapper hides anything that spills outside of it */
+      .iframe-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      /* The iframe is pulled up by 36px to hide the Google banner */
+      .app-iframe {
+        position: absolute;
+        left: 0;
+        width: 100%;
+		height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="iframe-wrapper">
+      <iframe id="appFrame" class="app-iframe"></iframe>
+    </div>
+	<script>
+      window.addEventListener('DOMContentLoaded', function() {
+        // 1. Define your base script deployment link safely here
+        const baseScriptUrl = "https://script.google.com/macros/s/AKfycbxyTGFbcmQwNcDTOxSPv8ZFT9ALmYBWVPsc-A2wte-BD-ustoISYGPtfAcp11YinkR5/exec";
+        
+        // 2. Fetch the incoming parameters from the browser address bar
+        const currentUrlParams = window.location.search;
+        const iframe = document.getElementById('appFrame');
+        
+        if (currentUrlParams) {
+          // If parameters like ?view=coordinator exist, cleanly append them
+          if (baseScriptUrl.indexOf('?') !== -1) {
+            iframe.src = baseScriptUrl + currentUrlParams.replace('?', '&');
+          } else {
+            iframe.src = baseScriptUrl + currentUrlParams;
+          }
+        } else {
+          // Otherwise, build the plain execution path safely
+          iframe.src = baseScriptUrl;
+        }
+      });
+    </script>
+  </body>
+</html>
